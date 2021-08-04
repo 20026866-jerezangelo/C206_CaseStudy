@@ -5,10 +5,13 @@ public class C206_CaseStudy {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
-		 ArrayList<Student> studentList = new ArrayList<Student>();
-		    studentList.add(new Student("Oliver Lim Yue Xuan", "M", 91992299, "20039775@rp.edu.sg", "04/09/2003", "Singapore", 2021));
+		ArrayList<Student> studentList = new ArrayList<Student>();
+		ArrayList<Registration> regList = new ArrayList<Registration>();
+		studentList.add(new Student("Oliver Lim Yue Xuan", "M", 91992299, "20039775@rp.edu.sg", "04/09/2003", "Singapore", 2021));
 		tuitionList.add(new Tuition(11 , "A113","Math", "Basic", 2, "none", 2021 ));
 		tuitionList.add(new Tuition(12 , "C206","Business", "Advance", 2, "basic must be comepleted", 2021 ));
+		regList.add(new Registration(1,"TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
+	    regList.add(new Registration(2,"TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
 		
 		int option = 0;
 		while (option != 4) {
@@ -153,6 +156,33 @@ public class C206_CaseStudy {
 	        }
 	      }
 
+	    }
+	  //add registration done by Ammar
+	    
+	    public static Registration inputRegistration() {
+	      int regNum = Helper.readInt("Enter Registration Number > ");
+	      String ttID = Helper.readString("Enter tuition timetable ID > ");
+	      String email = Helper.readString("Enter email > ");
+	      String status = "pending";
+	      String regDate = Helper.readString("Enter Registration Date > ");
+	      int emergencyContact = Helper.readInt("Enter Emergency Contact > ");
+	      
+	      Registration registration = new Registration(regNum, ttID, email, status, regDate, emergencyContact);
+	      return registration;
+	    }
+	  //view registration done by Ammar
+	    public static String retrieveAllRegistrations(ArrayList<Registration> regList) {
+	      String output = "";
+	      for( int i = 0 ; i < regList.size(); i++) {
+	        output += (String.format("%-20d %-20s %-20s %-20s %-20s %-20d\n",regList.get(i).getRegNum() , regList.get(i).getTTID(), regList.get(i).getEmail(),  regList.get(i).getStatus(),regList.get(i).getRegDate(), regList.get(i).getEmergencyContact()));    
+	      }
+	      return output; 
+	      
+	    }
+	    public static void viewAllRegistrations(ArrayList <Registration> regList) {
+	      String output = String.format("%-20s %-20s %-20s %-20s %-20s %-20s\n", "REG ID", "TIMETABLE ID", "EMAIL",  "STATUS", "EMERGENCY CONTACT");
+	         output += retrieveAllRegistrations(regList);  
+	        System.out.println(output);
 	    }
 	  }
 
