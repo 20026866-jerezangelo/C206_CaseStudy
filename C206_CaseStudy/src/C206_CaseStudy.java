@@ -83,11 +83,13 @@ public class C206_CaseStudy {
 		return tui;
 		
 	}
+	// done by eugene
 	public static void addTuition(ArrayList<Tuition> tuitionList, Tuition tui) {
 		
 		tuitionList.add(tui);
 		System.out.println("Tuition added");
 	}
+	// done by eugene
 	public static void deleteTuition(ArrayList<Tuition> tuitionList, Tuition tui) {
 		tuitionList.remove(tui);
 		System.out.println("Tuition deleted");
@@ -153,4 +155,4 @@ public class C206_CaseStudy {
 
 	    }
 	  }
-}
+
