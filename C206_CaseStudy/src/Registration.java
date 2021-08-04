@@ -7,9 +7,9 @@ public class Registration {
 	private String email;
 	private String status;
 	private String regDate;
-	private String emergencyContact;
+	private int emergencyContact;
 
-	public Registration(int regNum, int ttID, String email, String status, String regDate, String emergencyContact) {
+	public Registration(int regNum, int ttID, String email, String status, String regDate, int emergencyContact) {
 		this.regNum = regNum;
 		this.ttID = ttID;
 		this.email = email;
@@ -40,7 +40,7 @@ public class Registration {
 		return regDate();
 	}
 	
-	public String getEmergencyContact() {
+	public int getEmergencyContact() {
 		return emergencyContact;
 	}
 	
