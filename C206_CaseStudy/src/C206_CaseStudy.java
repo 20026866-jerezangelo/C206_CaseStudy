@@ -92,4 +92,15 @@ public class C206_CaseStudy {
 		System.out.println("Tuition deleted");
 	}
 	
+	//add registration done by Ammar
+	
+	public static Registration inputRegistration() {
+		int regNum = Helper.readInt("Enter Registration Number > ");
+		int ttID = Helper.readInt("Enter tuition timetable ID > ");
+		String email = Helper.readString("Enter email > ");
+		String regDate = Helper.readString("Enter Registration Date > ");
+		int emergency contact = Helper.readString("Enter Emergency Contact > ");
+	}
+	
+	
 }

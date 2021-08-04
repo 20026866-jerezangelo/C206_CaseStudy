@@ -1,15 +1,15 @@
 
 public class Registration {
  //angelo 
-	
+//Ammar has done registration
 	private int regNum;
-	private int ttID;
+	private String ttID;
 	private String email;
 	private String status;
 	private String regDate;
 	private int emergencyContact;
 
-	public Registration(int regNum, int ttID, String email, String status, String regDate, int emergencyContact) {
+	public Registration(int regNum, String ttID, String email, String status, String regDate, int emergencyContact) {
 		this.regNum = regNum;
 		this.ttID = ttID;
 		this.email = email;
@@ -24,7 +24,7 @@ public class Registration {
 		
 	}
 	
-	public int getTTID() {
+	public String getTTID() {
 		return ttID;
 	}
 	
