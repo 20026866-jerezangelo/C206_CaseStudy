@@ -1,5 +1,6 @@
 
 public class Registration {
+
 //Ammar has done registration class
 	private int regNum;
 	private String ttID;
@@ -55,4 +56,3 @@ public class Registration {
 
 	
 	
-
