@@ -1,7 +1,6 @@
 
 public class Registration {
- //angelo 
-//Ammar has done registration
+//Ammar has done registration class
 	private int regNum;
 	private String ttID;
 	private String email;
@@ -36,8 +35,8 @@ public class Registration {
 		return status;
 	}
 	
-	public String regDate() {
-		return regDate();
+	public String getRegDate() {
+		return regDate;
 	}
 	
 	public int getEmergencyContact() {
