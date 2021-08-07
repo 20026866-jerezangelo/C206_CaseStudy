@@ -1,68 +1,84 @@
 import java.util.ArrayList;
 
-public class C206_CaseStudy {
+public class TuitionManagementSystem {
+	// extracted constants done by angelo
+	private static final int DELETE_TUITION = 9;
+	private static final int VIEW_TUITIONS = 8;
+	private static final int ADD_QUESTION = 7;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
-
 		ArrayList<Registration> regList = new ArrayList<Registration>();
-		
-
 		ArrayList<Student> studentList = new ArrayList<Student>();
-		
-		studentList.add(new Student("Oliver Lim Yue Xuan", "M", 91992299, "20039775@rp.edu.sg", "04/09/2003", "Singapore", 2021));
-		tuitionList.add(new Tuition(11 , "A113","Math", "Basic", 2, "none", 2021 ));
-		tuitionList.add(new Tuition(12 , "C206","Business", "Advance", 2, "basic must be comepleted", 2021 ));
-		regList.add(new Registration(1,"TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
-	    regList.add(new Registration(2,"TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
-		
-		regList.add(new Registration(1,"TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
-		regList.add(new Registration(2,"TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
-		
-		
+		ArrayList<Timetable> timetableList = new ArrayList<Timetable>();
+		studentList.add(new Student("Oliver Lim Yue Xuan", "M", 91992299, "20039775@rp.edu.sg", "04/09/2003",
+				"Singapore", 2021));
+		tuitionList.add(new Tuition(11, "A113", "Math", "Basic", 2, "none", 2021));
+		tuitionList.add(new Tuition(12, "C206", "Business", "Advance", 2, "basic must be comepleted", 2021));
+		regList.add(new Registration(1, "TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
+		regList.add(new Registration(2, "TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
+		regList.add(new Registration(1, "TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
+		regList.add(new Registration(2, "TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
+		timetableList.add(new Timetable("TT01", 45, "08-08-21", "13-08-21", "1045", "1315", "ENGLISH"));
+
 		int option = 0;
-		while (option != 7) {
-			C206_CaseStudy.menu();
+		while (option != 13) {
+			TuitionManagementSystem.menu();
 			option = Helper.readInt("Enter an option > ");
-			
-			if(option == 1) {
-				C206_CaseStudy.viewAllTuition(tuitionList);
-			}
-			else if(option == 2) {
+
+			if (option == 1) {
+				TuitionManagementSystem.viewAllTuition(tuitionList);
+			} else if (option == 2) {
 				Tuition tui = inputTuition();
-				C206_CaseStudy.addTuition(tuitionList, tui);
-				}
-			else if (option == 3) {
+				TuitionManagementSystem.addTuition(tuitionList, tui);
+			} else if (option == 3) {
 				Tuition tui = inputTuition();
-				C206_CaseStudy.deleteTuition(tuitionList, tui);
+				TuitionManagementSystem.deleteTuition(tuitionList, tui);
+			} else if (option == 4) {
+
+			} else if (option == 5) {
+
+			} else if (option == 6) {
+
+			} else if (option == ADD_QUESTION) {
+				TuitionManagementSystem.AddTuitionTimetable(timetableList);
+			} else if (option == VIEW_TUITIONS) {
+				TuitionManagementSystem.viewAllTuitionTimetables(timetableList);
+			} else if (option == DELETE_TUITION) {
+				TuitionManagementSystem.deleteTuitionTimetable(timetableList);
+			} else if (option == 10) {
+
+			} else if (option == 11) {
+
+			} else if (option == 12) {
+
 			}
-			else if (option == 4) {
-				C206_CaseStudy.addRegistration(regList, inputRegistration());
-			}
-			
-			
-			else if (option == 7) {
-				System.out.println("Bye");
-			}
-			else {
-				System.out.println("Invalid option");
+
+			else if (option == 13) {
+				System.out.println("Thank you for using our Tuition Center Manager Application!");
+			} else {
+				System.out.println("Invalid option entered!");
 			}
 		}
 	}
 
-	// menu done by eugene
 	public static void menu() {
 
-		C206_CaseStudy.setHeader("TUITION");
+		TuitionManagementSystem.setHeader("TUITION MANAGEMENT");
 		System.out.println("1. Display Tuition");
 		System.out.println("2. Add Tuition");
 		System.out.println("3. Delete Tuition");
 		System.out.println("4. Add Registration");
 		System.out.println("5. View Registrations");
 		System.out.println("6. Delete Registrations");
-
-		System.out.println("7. Quit");
+		System.out.println("7. Add Tuition Timetable");
+		System.out.println("8. View Tuition Timetables");
+		System.out.println("9. Delete Tuition Timetables");
+		System.out.println("10.*oliver put ur option here*");
+		System.out.println("11.*oliver put ur option here*");
+		System.out.println("12.*oliver put ur option here*");
+		System.out.println("13. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -74,7 +90,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 
-	// option 1 view done by Eugene
+	// view done by Eugene
 	public static String retrieveAllTuition(ArrayList<Tuition> tuitionList) {
 		String output = "";
 		for (int i = 0; i < tuitionList.size(); i++) {
@@ -88,14 +104,14 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewAllTuition(ArrayList<Tuition> tuitionList) {
-		C206_CaseStudy.setHeader("TUITION LIST");
+		TuitionManagementSystem.setHeader("TUITION LIST");
 		String output = String.format("%-20s %-20s %-20s %-20s %-20s %-20s\n", "TUITION CODE", "TITLE",
 				"SUBJECT GRP NAME", "DESCRIPTION", "DURATION", "PRE-REQUISITE", "YEAR STARTED");
 		output += retrieveAllTuition(tuitionList);
 		System.out.println(output);
 	}
 
-	// option 2 add done by Eugene
+	// add done by Eugene
 	public static Tuition inputTuition() {
 		int code = Helper.readInt("Enter tuition code > ");
 		String title = Helper.readString("Enter title > ");
@@ -123,8 +139,6 @@ public class C206_CaseStudy {
 		System.out.println("Tuition deleted");
 	}
 
-
-
 	// Oliver
 	public static String retrieveStudent(ArrayList<Student> studentList) {
 		String output = "";
@@ -136,7 +150,7 @@ public class C206_CaseStudy {
 
 	// Oliver
 	public static void viewStudent(ArrayList<Student> studentList) {
-		C206_CaseStudy.setHeader("STUDENT LIST");
+		TuitionManagementSystem.setHeader("STUDENT LIST");
 		String output = String.format("%-20s %-15s %-20s %-25s %-20s %-20s %-15s\n", "NAME", "GENDER", "MOBILE NUMBER",
 				"EMAIL", "dateofbirth", "COR", "year joined");
 		output += retrieveStudent(studentList);
@@ -196,24 +210,12 @@ public class C206_CaseStudy {
 		int regNum = Helper.readInt("Enter Registration Number > ");
 		String ttID = Helper.readString("Enter tuition timetable ID > ");
 		String email = Helper.readString("Enter email > ");
-		int regNumConfirm = Helper.readInt("Enter Registration Number Again > ");
-		String ttIDConfirm = Helper.readString("Enter tuition timetable ID again > ");
-		String emailConfirm = Helper.readString("Enter email again > ");
 		String status = "pending";
 		String regDate = Helper.readString("Enter Registration Date > ");
 		int emergencyContact = Helper.readInt("Enter Emergency Contact > ");
-		if(regNumConfirm != regNum && !ttIDConfirm.equals(ttID) && !emailConfirm.equals(email)){
-			System.out.println("Details do not match!");
-		}
-		
 
 		Registration registration = new Registration(regNum, ttID, email, status, regDate, emergencyContact);
 		return registration;
-	}
-	
-	public static void addRegistration(ArrayList<Registration> regList, Registration registration) {
-			regList.add(registration);
-		
 	}
 
 	// view registration done by Ammar
@@ -228,25 +230,56 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void viewAllRegistrations(ArrayList <Registration> regList) {
-	      String output = String.format("%-20s %-20s %-20s %-20s %-20s %-20s\n", "REG ID", "TIMETABLE ID", "EMAIL",  "STATUS", "EMERGENCY CONTACT");
-	         output += retrieveAllRegistrations(regList);  
-	        System.out.println(output);
-	    }
-	
-	public static void deleteRegistration(ArrayList<Registration> regList, Registration registration) {
-		int regID = Helper.readInt("Enter Registration ID to Delete > ");
-		String regIDConfirm = Helper.readString("Are you sure (Y/N) > ");
-		
-		
-		for (int i = 0; i < regList.size(); i++) {
-			if(regList.get(i).getRegNum() == regID && regIDConfirm.equalsIgnoreCase("Y")) {
-				regList.remove(registration);
-				System.out.println("Registration Deleted!");
-				
-			
+	public static void viewAllRegistrations(ArrayList<Registration> regList) {
+		String output = String.format("%-20s %-20s %-20s %-20s %-20s %-20s\n", "REG ID", "TIMETABLE ID", "EMAIL",
+				"STATUS", "EMERGENCY CONTACT");
+		output += retrieveAllRegistrations(regList);
+		System.out.println(output);
+	}
+
+	// add tuition timetable done by angelo
+	public static void AddTuitionTimetable(ArrayList<Timetable> timetableList) {
+		String ttID = Helper.readString("Enter Tuition ID > ");
+		double price = Helper.readDouble("Enter Price > ");
+		String sDate = Helper.readString("Enter Start Date (DD-MM-YY) > ");
+		String sTime = Helper.readString("Enter Start Time (24H FORMAT) > ");
+		String eDate = Helper.readString("Enter End Date (DD-MM-YY) > ");
+		String eTime = Helper.readString("Enter End Time (24H FORMAT) > ");
+		String mode = Helper.readString("Enter Mode > ");
+		Timetable newTT = new Timetable(ttID.toUpperCase(), price, sDate, eDate, sTime, eTime, mode);
+		timetableList.add(newTT);
+		System.out.println(String.format("Timetable with ID '%s' has been successfully added!", ttID.toUpperCase()));
+	}
+
+	// view tuition timetable done by angelo
+	public static void viewAllTuitionTimetables(ArrayList<Timetable> timetableList) {
+		TuitionManagementSystem.setHeader("LIST OF TUITION TIMETABLES");
+		String output = String.format("%-15s %-10s %-15s %-15s %-15s %-10s %-10s\n", "TUITION ID", "PRICE",
+				"START DATE", "END DATE", "START TIME", "END TIME", "MODE");
+		for (int x = 0; x < timetableList.size(); x++) {
+			output += String.format("%-15s $%-10.2f %-15s %-15s %-15s %-10s %-10s\n", timetableList.get(x).getTTID(),
+					timetableList.get(x).getPrice(), timetableList.get(x).getStartDate(),
+					timetableList.get(x).getEndDate(), timetableList.get(x).getStartTime(),
+					timetableList.get(x).getEndTime(), timetableList.get(x).getMode().toUpperCase());
+		}
+		System.out.println(output);
+	}
+
+	// delete tuition timetable done by angelo
+	public static void deleteTuitionTimetable(ArrayList<Timetable> timetableList) {
+		TuitionManagementSystem.viewAllTuitionTimetables(timetableList);
+		String deleteInput = Helper.readString("From the above, select the timetable to delete > ");
+		for (int x = 0; x < timetableList.size(); x++) {
+			String output = String.format("%-15s %-10s %-15s %-15s %-15s %-10s %-10s\n", "TUITION ID", "PRICE",
+					"START DATE", "END DATE", "START TIME", "END TIME", "MODE");
+			if (timetableList.get(x).getTTID().equalsIgnoreCase(deleteInput)) {
+				timetableList.remove(x);
+				output += String.format("Timetable with ID '%s' has been successfully deleted!", deleteInput);
+				System.out.println(output);
+			} else {
+				output += String.format("There are no existing timetables with ID '%s'", deleteInput);
+				System.out.println(output);
 			}
-			}
+		}
 	}
 }
-
