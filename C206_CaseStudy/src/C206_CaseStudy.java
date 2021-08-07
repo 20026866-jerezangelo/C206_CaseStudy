@@ -193,12 +193,24 @@ public class C206_CaseStudy {
 		int regNum = Helper.readInt("Enter Registration Number > ");
 		String ttID = Helper.readString("Enter tuition timetable ID > ");
 		String email = Helper.readString("Enter email > ");
+		int regNumConfirm = Helper.readInt("Enter Registration Number Again > ");
+		String ttIDConfirm = Helper.readString("Enter tuition timetable ID again > ");
+		String emailConfirm = Helper.readString("Enter email again > ");
 		String status = "pending";
 		String regDate = Helper.readString("Enter Registration Date > ");
 		int emergencyContact = Helper.readInt("Enter Emergency Contact > ");
+		if(regNumConfirm != regNum && !ttIDConfirm.equals(ttID) && !emailConfirm.equals(email)){
+			System.out.println("Details do not match!");
+		}
+		
 
 		Registration registration = new Registration(regNum, ttID, email, status, regDate, emergencyContact);
 		return registration;
+	}
+	
+	public static void addStudent(ArrayList<Registration> regList, Registration registration) {
+			regList.add(registration);
+		
 	}
 
 	// view registration done by Ammar
@@ -218,5 +230,20 @@ public class C206_CaseStudy {
 	         output += retrieveAllRegistrations(regList);  
 	        System.out.println(output);
 	    }
+	
+	public static void deleteRegistration(ArrayList<Registration> regList, Registration registration) {
+		int regID = Helper.readInt("Enter Registration ID to Delete > ");
+		String regIDConfirm = Helper.readString("Are you sure (Y/N) > ");
+		
+		
+		for (int i = 0; i < regList.size(); i++) {
+			if(regList.get(i).getRegNum() == regID && regIDConfirm.equalsIgnoreCase("Y")) {
+				regList.remove(registration);
+				System.out.println("Registration Deleted!");
+				
+			
+			}
+			}
+	}
 }
 
