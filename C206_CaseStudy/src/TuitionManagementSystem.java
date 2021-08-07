@@ -19,8 +19,7 @@ public class TuitionManagementSystem {
 		tuitionList.add(new Tuition(12, "C206", "Business", "Advance", 2, "basic must be comepleted", 2021));
 		regList.add(new Registration(1, "TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
 		regList.add(new Registration(2, "TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
-		regList.add(new Registration(1, "TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567));
-		regList.add(new Registration(2, "TT04", "Shafiq15@outlook.com", "pending", "04-03-2021", 89765432));
+
 		timetableList.add(new Timetable("TT01", 45, "08-08-21", "13-08-21", "1045", "1315", "ENGLISH"));
 
 		int option = 0;
