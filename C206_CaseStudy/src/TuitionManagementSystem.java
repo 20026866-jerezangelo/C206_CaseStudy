@@ -256,6 +256,7 @@ public class TuitionManagementSystem {
 		System.out.println(output);
 	}
 	
+	
 	//Delete registration done by Ammar
 	
 	public static void deleteRegistration(ArrayList<Registration> regList) {
