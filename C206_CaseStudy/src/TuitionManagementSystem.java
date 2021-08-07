@@ -5,6 +5,7 @@ public class TuitionManagementSystem {
 	private static final int DELETE_TUITION = 9;
 	private static final int VIEW_TUITIONS = 8;
 	private static final int ADD_QUESTION = 7;
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -36,10 +37,13 @@ public class TuitionManagementSystem {
 				Tuition tui = inputTuition();
 				TuitionManagementSystem.deleteTuition(tuitionList, tui);
 			} else if (option == 4) {
-
+				TuitionManagementSystem.addRegistration(regList, null);
+				
 			} else if (option == 5) {
+				TuitionManagementSystem.viewAllRegistrations(regList);
 
 			} else if (option == 6) {
+				TuitionManagementSystem.deleteRegistration(regList);
 
 			} else if (option == ADD_QUESTION) {
 				TuitionManagementSystem.AddTuitionTimetable(timetableList);
@@ -210,12 +214,27 @@ public class TuitionManagementSystem {
 		int regNum = Helper.readInt("Enter Registration Number > ");
 		String ttID = Helper.readString("Enter tuition timetable ID > ");
 		String email = Helper.readString("Enter email > ");
+		int regNumConfirm = Helper.readInt("Enter Registration Number Again > ");
+		String ttIDConfirm = Helper.readString("Enter Tuition Timetable ID again > ");
+		String emailConfirm = Helper.readString("Enter email Again > ");
 		String status = "pending";
 		String regDate = Helper.readString("Enter Registration Date > ");
 		int emergencyContact = Helper.readInt("Enter Emergency Contact > ");
+		
+		if(regNumConfirm != regNum && !ttIDConfirm.equals(ttID) && !emailConfirm.equals(email)) {
+			System.out.println("Details do not match!");
+			
+		}
 
 		Registration registration = new Registration(regNum, ttID, email, status, regDate, emergencyContact);
 		return registration;
+	}
+	
+	public static void addRegistration(ArrayList<Registration> regList, Registration registration) {
+		
+		regList.add(registration);
+		System.out.println("Registration added!");
+		
 	}
 
 	// view registration done by Ammar
@@ -235,6 +254,24 @@ public class TuitionManagementSystem {
 				"STATUS", "EMERGENCY CONTACT");
 		output += retrieveAllRegistrations(regList);
 		System.out.println(output);
+	}
+	
+	//Delete registration done by Ammar
+	
+	public static void deleteRegistration(ArrayList<Registration> regList) {
+		int regNumDelete = Helper.readInt("Enter Registration number to Delete > ");
+		String  regNumDeleteConfirm = Helper.readString("Are you sure?(Y/N) > " );
+		
+		for(int i = 0; i < regList.size(); i++) {
+			if(regList.get(i).getRegNum() == regNumDelete && regNumDeleteConfirm.equalsIgnoreCase("Y")) {
+				regList.remove(i);
+				
+			}else {
+				System.out.println("Register Not Deleted.(Either Register Number not found or operation cancelled");
+			}
+		}
+		
+		
 	}
 
 	// add tuition timetable done by angelo
