@@ -22,7 +22,7 @@ public class C206_CaseStudy {
 		
 		
 		int option = 0;
-		while (option != 4) {
+		while (option != 7) {
 			C206_CaseStudy.menu();
 			option = Helper.readInt("Enter an option > ");
 			
@@ -37,9 +37,12 @@ public class C206_CaseStudy {
 				Tuition tui = inputTuition();
 				C206_CaseStudy.deleteTuition(tuitionList, tui);
 			}
-			
-			
 			else if (option == 4) {
+				C206_CaseStudy.addRegistration(regList, inputRegistration());
+			}
+			
+			
+			else if (option == 7) {
 				System.out.println("Bye");
 			}
 			else {
@@ -208,7 +211,7 @@ public class C206_CaseStudy {
 		return registration;
 	}
 	
-	public static void addStudent(ArrayList<Registration> regList, Registration registration) {
+	public static void addRegistration(ArrayList<Registration> regList, Registration registration) {
 			regList.add(registration);
 		
 	}
