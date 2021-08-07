@@ -322,14 +322,21 @@ public class TuitionManagementSystem {
 		TuitionManagementSystem.viewAllTuitionTimetables(timetableList);
 		String deleteInput = Helper.readString("From the above, select the timetable to delete > ");
 		for (int x = 0; x < timetableList.size(); x++) {
-			String output = TuitionDisplayHeaders();
 			// extracted method called here
 			if (timetableList.get(x).getTTID().equalsIgnoreCase(deleteInput)) {
-				timetableList.remove(x);
-				output += String.format("Timetable with ID '%s' has been successfully deleted!", deleteInput);
-				System.out.println(output);
+				System.out.println("Timetable ID selected: " + deleteInput.toUpperCase());
+				char confirmDel = Helper.readChar("Are you sure you would like to delete this timetable? (Y/N)");
+				if(confirmDel == 'Y' || confirmDel == 'y') {
+					timetableList.remove(x);
+					String output = String.format("Timetable with ID '%s' has been successfully deleted!", deleteInput.toUpperCase());
+					System.out.println(output);
+				}
+				else if(confirmDel == 'n' || confirmDel == 'N') {
+					System.out.println("Redirecting you to the deletion page...");
+					TuitionManagementSystem.deleteTuitionTimetable(timetableList);
+				}
 			} else {
-				output += String.format("There are no existing timetables with ID '%s'", deleteInput);
+				String output = String.format("There are no existing timetables with ID '%s'", deleteInput.toUpperCase());
 				System.out.println(output);
 			}
 		}
