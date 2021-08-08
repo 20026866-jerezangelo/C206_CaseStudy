@@ -55,10 +55,14 @@ public class TuitionManagementSystem {
 				TuitionManagementSystem.deleteTuitionTimetable(timetableList);
 				
 			} else if (option == 10) {
+				TuitionManagementSystem.viewStudent(studentList);
 
 			} else if (option == 11) {
+				Student stud = inputStudent();
+				TuitionManagementSystem.addStudent(studentList, stud);
 
 			} else if (option == 12) {
+				TuitionManagementSystem.deleteStudent(studentList);
 
 			}
 
@@ -82,9 +86,9 @@ public class TuitionManagementSystem {
 		System.out.println("7. Add Tuition Timetable");
 		System.out.println("8. View Tuition Timetables");
 		System.out.println("9. Delete Tuition Timetables");
-		System.out.println("10.*oliver put ur option here*");
-		System.out.println("11.*oliver put ur option here*");
-		System.out.println("12.*oliver put ur option here*");
+		System.out.println("10. View Student");
+		System.out.println("11. Add Student");
+		System.out.println("12. Delete Student");
 		System.out.println("13. Quit");
 		Helper.line(80, "-");
 
@@ -160,7 +164,7 @@ public class TuitionManagementSystem {
 	// Oliver
 	public static void viewStudent(ArrayList<Student> studentList) {
 		TuitionManagementSystem.setHeader("STUDENT LIST");
-		String output = String.format("%-20s %-15s %-20s %-25s %-20s %-20s %-15s\n", "NAME", "GENDER", "MOBILE NUMBER",
+		String output = String.format("%-10s %-10s %-30s %-15s %-15s %-15s %-25s\n", "NAME", "GENDER", "MOBILE NUMBER",
 				"EMAIL", "dateofbirth", "COR", "year joined");
 		output += retrieveStudent(studentList);
 		System.out.println(output);
@@ -356,5 +360,3 @@ public class TuitionManagementSystem {
 		}
 	}
 }
-
-
