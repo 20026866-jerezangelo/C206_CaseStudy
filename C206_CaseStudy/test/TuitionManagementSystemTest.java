@@ -10,17 +10,29 @@ public class TuitionManagementSystemTest {
 	private ArrayList<Student> studentList;
 	private Registration r; 
 	private ArrayList<Registration> regList;
+	private Tuition t1;
+	private Tuition t2;
+	private Tuition t3;
+	private ArrayList<Tuition>tuitionList;
 	@Before
 	public void setUp() throws Exception {
 		studentList = new ArrayList<Student>();
 		s = new Student("oliver lim yue xuan", "M", 91992299, "20039775@rp.edu.sg", "04/09/2003", "Singapore", 2021);
 		regList = new ArrayList<Registration>();
 		r = new Registration(1, "TT01", "Raj01@outlook.com", "pending", "04-08-2021", 81234567);
+		t1 = new Tuition(001,"Introduction to programming", "Java", "Basic", 5, "None", 2021 );
+		t2 = new Tuition(002,"Introduction to business", "Business", "Basic", 5,"None",2021);
+		t3 = new Tuition(003,"Advance Java", "Java" , "Advance", 6, "Basic" ,2021);
+		tuitionList = new ArrayList<Tuition>();
+	
 	}
 
 	@After
 	public void tearDown() throws Exception {studentList = null;
 	s = null;
+	t1 = null;
+	t2 = null;
+	tuitionList = null;
 	}
 
 	@Test
@@ -119,6 +131,31 @@ public class TuitionManagementSystemTest {
 		    assertEquals("Test that the size of Registration arraylist is 1", 1, regList.size());
 		    assertSame("Test that a Registration is successfully added", s, studentList.get(0));
 	  }
+	  // Eugene 
+	  public void viewAllTuition() {
+			assertNotNull("Test if there is a valid tuition arraylist to retrieve details",tuitionList);
+			String all =TuitionManagementSystem.viewAllTuition(tuitionList);
+			String testOutput = "";
+			assertEquals("Check that ViewAllTuition",testOutput,all);
+			TuitionManagementSystem.addTuition(tuitionList, t1);
+			TuitionManagementSystem.addTuition(tuitionList, t2 );
+			assertEquals("Test that tuition size is 2",2,tuitionList.size());
+	}
+		public void addTuition() {
+			
+			assertNotNull("Check if there is a valid Timetable arrayList to add to", tuitionList);
+					
+			TuitionManagementSystem.addTuition(tuitionList, t3);
+			assertEquals("Check that tuition arraylist size is 1", 1,tuitionList.size());
+			assertSame("Check that tuition is added",t3,tuitionList.get(0));
+					
+		
+		}
+		public void deleteTuition() {
+			boolean isDeleted = TuitionManagementSystem.deleteTuition(tuitionList, t1);
+			assertFalse("Test if tuition have been deleted", isDeleted);
+			
+		}
 	
 	}
 

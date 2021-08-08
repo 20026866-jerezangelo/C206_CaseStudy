@@ -106,12 +106,13 @@ public class TuitionManagementSystem {
 		return output;
 	}
 
-	public static void viewAllTuition(ArrayList<Tuition> tuitionList) {
+	public static String viewAllTuition(ArrayList<Tuition> tuitionList) {
 		TuitionManagementSystem.setHeader("TUITION LIST");
 		String output = String.format("%-20s %-20s %-20s %-20s %-20s %-20s\n", "TUITION CODE", "TITLE",
 				"SUBJECT GRP NAME", "DESCRIPTION", "DURATION", "PRE-REQUISITE", "YEAR STARTED");
 		output += retrieveAllTuition(tuitionList);
 		System.out.println(output);
+		return output;
 	}
 
 	// add done by Eugene
@@ -137,9 +138,10 @@ public class TuitionManagementSystem {
 	}
 
 	// done by eugene
-	public static void deleteTuition(ArrayList<Tuition> tuitionList, Tuition tui) {
+	public static boolean deleteTuition(ArrayList<Tuition> tuitionList, Tuition tui) {
 		tuitionList.remove(tui);
 		System.out.println("Tuition deleted");
+		return true;
 	}
 
 	// Oliver
