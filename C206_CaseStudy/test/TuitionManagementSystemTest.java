@@ -28,8 +28,8 @@ public class TuitionManagementSystemTest {
 		t2 = new Tuition(002, "Introduction to business", "Business", "Basic", 5, "None", 2021);
 		t3 = new Tuition(003, "Advance Java", "Java", "Advance", 6, "Basic", 2021);
 		tuitionList = new ArrayList<Tuition>();
-		t = new Timetable("TT01", 240, "08-09-21", "08-12-21", "1030", "1330", "ENGLISH");
-		tt = new Timetable("TT02", 120, "08-09-21", "08-10-21", "1230", "1430", "ENGLISH");
+		t = new Timetable("TT01", 240, "08-09-21", "08-12-21", "1030", "1340", "ENGLISH");
+		tt = new Timetable("TT02", 120, "08-09-21", "08-10-21", "1230", "1440", "ENGLISH");
 		ttList = new ArrayList<Timetable>();
 
 	}
@@ -218,12 +218,12 @@ public class TuitionManagementSystemTest {
 		TuitionManagementSystem.addTuitionTimetable(ttList, t);
 		TuitionManagementSystem.addTuitionTimetable(ttList, tt);
 		assertNotNull("Test if there is a valid timetable arraylist to retrieve item", ttList);
-		// given an empty list, after deleting 2 timetables, test if the size of the
+		// given an empty list, after deleting 2 timetables, test that the size of the
 		// list shrinks to 0,
 		// since timetableList can be empty but NOT NULL
 		TuitionManagementSystem.deleteTuitionTimetable(ttList);
 		TuitionManagementSystem.deleteTuitionTimetable(ttList);
-		assertEquals("Test that timetableList size is 2", 2, ttList.size());
+		assertEquals("Test that timetableList size is 0 after deleting", 0, ttList.size());
 	}
 
 }
