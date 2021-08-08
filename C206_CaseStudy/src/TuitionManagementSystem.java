@@ -36,7 +36,7 @@ public class TuitionManagementSystem {
 				Tuition tui = inputTuition();
 				TuitionManagementSystem.deleteTuition(tuitionList, tui);
 			} else if (option == 4) {
-				TuitionManagementSystem.addRegistration(regList, null);
+				TuitionManagementSystem.addRegistration(regList, inputRegistration());
 				
 			} else if (option == 5) {
 				TuitionManagementSystem.viewAllRegistrations(regList);
