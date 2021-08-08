@@ -280,7 +280,7 @@ public class TuitionManagementSystem {
 		
 	}
 
-	// add tuition timetable done by angelo
+	// input tuition timetable done by angelo
 	public static Timetable tuitionTimetableInput() {
 		String ttID = Helper.readString("Enter Tuition ID > ");
 		double price = Helper.readDouble("Enter Price > ");
@@ -292,6 +292,7 @@ public class TuitionManagementSystem {
 		Timetable tt = new Timetable(ttID.toUpperCase(), price, sDate, eDate, sTime, eTime, mode);
 		return tt;
 	}
+	// add tuition timetable done by angelo
 	public static void addTuitionTimetable(ArrayList<Timetable> timetableList, Timetable tt) {
 		timetableList.add(tt);
 		System.out.println(String.format("Timetable has been successfully added!", tt));
@@ -314,7 +315,9 @@ public class TuitionManagementSystem {
 	public static String RetrieveAllTimetables(ArrayList<Timetable> timetableList) {
 		String output = "";
 		for (int x = 0; x < timetableList.size(); x++) {
-			output += String.format("%-15s $%-9.2f %-15s %-15s %-15s %-10s %-10s\n", timetableList.get(x).getTTID(), timetableList.get(x).getPrice(), timetableList.get(x).getStartDate(), timetableList.get(x).getEndDate(), timetableList.get(x).getStartTime(), timetableList.get(x).getEndTime(), timetableList.get(x).getMode().toUpperCase());
+			output += String.format("%-15s $%-9.2f %-15s %-15s %-15s %-10s %-10s\n", timetableList.get(x).getTTID(), 
+			timetableList.get(x).getPrice(), timetableList.get(x).getStartDate(), timetableList.get(x).getEndDate(),
+			timetableList.get(x).getStartTime(), timetableList.get(x).getEndTime(), timetableList.get(x).getMode().toUpperCase());
 			// retrieve all tuition information is now one method which can be called anywhere whenever needed
 		}
 		return output;
