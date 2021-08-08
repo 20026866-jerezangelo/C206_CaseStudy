@@ -14,6 +14,9 @@ public class TuitionManagementSystemTest {
 	private Tuition t2;
 	private Tuition t3;
 	private ArrayList<Tuition>tuitionList;
+	private Timetable t;
+	private Timetable tt;
+	private ArrayList<Timetable>ttList;
 	@Before
 	public void setUp() throws Exception {
 		studentList = new ArrayList<Student>();
@@ -24,6 +27,9 @@ public class TuitionManagementSystemTest {
 		t2 = new Tuition(002,"Introduction to business", "Business", "Basic", 5,"None",2021);
 		t3 = new Tuition(003,"Advance Java", "Java" , "Advance", 6, "Basic" ,2021);
 		tuitionList = new ArrayList<Tuition>();
+		t = new Timetable("TT01",240,"08-09-21","08-12-21","1030","1330","ENGLISH");
+		tt = new Timetable("TT02",120,"08-09-21","08-10-21","1230","1430","ENGLISH");
+		ttList = new ArrayList<Timetable>();
 	
 	}
 
@@ -156,6 +162,51 @@ public class TuitionManagementSystemTest {
 			assertFalse("Test if tuition have been deleted", isDeleted);
 			
 		}
+		
+		@Test
+		public void addTuitionTimetableTest() {
+			// Test that the timetable list is not null before a new timetable can be added to 
+			assertNotNull("Check if there is a valid Timetable arrayList to add to", ttList);
+			// given that an empty list, after adding 1 item, the size of the list is 1 
+			TuitionManagementSystem.addTuitionTimetable(ttList, t);
+			assertEquals("Check that timetable arraylist size is 1", 1,ttList.size());
+			assertSame("Check that timetable is added",t,ttList.get(0));
+			
+			//Add another timetable test that the size of the list is 2 
+			// the timetable just added is as the same as the second timetable of the list
+			TuitionManagementSystem.addTuitionTimetable(ttList, tt);
+			assertEquals("Check that timetable arraylist size is 2", 2,ttList.size());
+			assertSame("Check that timetable is added",tt,ttList.get(1));
+		}
+		
+		@Test
+		public void RetrieveAllTimetablesTest() {
+			//test if timetable list is not null but empty so that items can be added to it 
+			assertNotNull("Test if there is a valid timetable arraylist to retrieve item",ttList);
+			
+			//test if the list of timetable retrieved from the system is empty 
+			String allTimetable = TuitionManagementSystem.RetrieveAllTimetables(ttList);
+			String testOutput = "";
+			assertEquals("Check that ViewAllTimetableList",testOutput,allTimetable);
+			
+			//given an empty list, after adding 2 timetables, test if the size of the list increases to 2 
+			TuitionManagementSystem.addTuitionTimetable(ttList, t);
+			TuitionManagementSystem.addTuitionTimetable(ttList, tt);
+			assertEquals("Test that timetableList size is 2",2,ttList.size());
+		}
+		
+			@Test
+			public void doDeleteTimetableTest() {
+				//test if timetable list is not null but empty so that items can be deleted from it 
+				TuitionManagementSystem.addTuitionTimetable(ttList, t);
+				TuitionManagementSystem.addTuitionTimetable(ttList, tt);
+				assertNotNull("Test if there is a valid timetable arraylist to retrieve item",ttList);
+				//given an empty list, after deleting 2 timetables, test if the size of the list shrinks to 0
+				//since timetableList can be empty but NOT NULL
+				TuitionManagementSystem.deleteTuitionTimetable(ttList);
+				TuitionManagementSystem.deleteTuitionTimetable(ttList);
+				assertEquals("Test that timetableList size is 2",2,ttList.size());									
+			}
 	
 	}
 

@@ -4,7 +4,7 @@ public class TuitionManagementSystem {
 	// extracted constants done by angelo
 	private static final int DELETE_TUITION = 9;
 	private static final int VIEW_TUITIONS = 8;
-	private static final int ADD_QUESTION = 7;
+	private static final int ADD_TUITION = 7;
 	
 
 	public static void main(String[] args) {
@@ -44,12 +44,16 @@ public class TuitionManagementSystem {
 			} else if (option == 6) {
 				TuitionManagementSystem.deleteRegistration(regList);
 
-			} else if (option == ADD_QUESTION) {
-				TuitionManagementSystem.AddTuitionTimetable(timetableList);
+			} else if (option == ADD_TUITION) {
+				Timetable tt = tuitionTimetableInput();
+				TuitionManagementSystem.addTuitionTimetable(timetableList, tt);
+				
 			} else if (option == VIEW_TUITIONS) {
 				TuitionManagementSystem.viewAllTuitionTimetables(timetableList);
+				
 			} else if (option == DELETE_TUITION) {
 				TuitionManagementSystem.deleteTuitionTimetable(timetableList);
+				
 			} else if (option == 10) {
 
 			} else if (option == 11) {
@@ -277,7 +281,7 @@ public class TuitionManagementSystem {
 	}
 
 	// add tuition timetable done by angelo
-	public static void AddTuitionTimetable(ArrayList<Timetable> timetableList) {
+	public static Timetable tuitionTimetableInput() {
 		String ttID = Helper.readString("Enter Tuition ID > ");
 		double price = Helper.readDouble("Enter Price > ");
 		String sDate = Helper.readString("Enter Start Date (DD-MM-YY) > ");
@@ -285,36 +289,33 @@ public class TuitionManagementSystem {
 		String eDate = Helper.readString("Enter End Date (DD-MM-YY) > ");
 		String eTime = Helper.readString("Enter End Time (24H FORMAT) > ");
 		String mode = Helper.readString("Enter Mode > ");
-		Timetable newTT = new Timetable(ttID.toUpperCase(), price, sDate, eDate, sTime, eTime, mode);
-		timetableList.add(newTT);
-		System.out.println(String.format("Timetable with ID '%s' has been successfully added!", ttID.toUpperCase()));
+		Timetable tt = new Timetable(ttID.toUpperCase(), price, sDate, eDate, sTime, eTime, mode);
+		return tt;
+	}
+	public static void addTuitionTimetable(ArrayList<Timetable> timetableList, Timetable tt) {
+		timetableList.add(tt);
+		System.out.println(String.format("Timetable has been successfully added!", tt));
 	}
 
 	// view tuition timetable done by angelo
 	public static void viewAllTuitionTimetables(ArrayList<Timetable> timetableList) {
 		TuitionManagementSystem.setHeader("LIST OF TUITION TIMETABLES");
-		String output = TuitionDisplayHeaders();
-		output = RetrieveAllTimetables(timetableList, output);
+		String output = tuitionDisplayHeaders();
+		output += RetrieveAllTimetables(timetableList);
 		System.out.println(output);
 	}
 	// retrieved method for displaying ONLY headers(labels) for tuition options done by angelo
-	private static String TuitionDisplayHeaders() {
+	private static String tuitionDisplayHeaders() {
 		String output = String.format("%-15s %-10s %-15s %-15s %-15s %-10s %-10s\n", "TUITION ID", "PRICE",
 				"START DATE", "END DATE", "START TIME", "END TIME", "MODE");
 		return output;
 	}
-	// extracted variables for tuition options done by angelo 
-	private static String RetrieveAllTimetables(ArrayList<Timetable> timetableList, String output) {
+	// extracted method for to retrieve tuition information done by angelo 
+	public static String RetrieveAllTimetables(ArrayList<Timetable> timetableList) {
+		String output = "";
 		for (int x = 0; x < timetableList.size(); x++) {
-			String TuitionID = timetableList.get(x).getTTID();
-			double TuitionPrice = timetableList.get(x).getPrice();
-			String StartDate = timetableList.get(x).getStartDate();
-			String EndDate = timetableList.get(x).getEndDate();
-			String StartTime = timetableList.get(x).getStartTime();
-			String EndTime = timetableList.get(x).getEndTime();
-			String TuitionMode = timetableList.get(x).getMode();
-			output += String.format("%-15s $%-9.2f %-15s %-15s %-15s %-10s %-10s\n", TuitionID, TuitionPrice, StartDate, EndDate, StartTime, EndTime, TuitionMode.toUpperCase());
-			// code is now more organized and easier to read!
+			output += String.format("%-15s $%-9.2f %-15s %-15s %-15s %-10s %-10s\n", timetableList.get(x).getTTID(), timetableList.get(x).getPrice(), timetableList.get(x).getStartDate(), timetableList.get(x).getEndDate(), timetableList.get(x).getStartTime(), timetableList.get(x).getEndTime(), timetableList.get(x).getMode().toUpperCase());
+			// retrieve all tuition information is now one method which can be called anywhere whenever needed
 		}
 		return output;
 	}
@@ -324,9 +325,15 @@ public class TuitionManagementSystem {
 		TuitionManagementSystem.viewAllTuitionTimetables(timetableList);
 		String deleteInput = Helper.readString("From the above, select the timetable to delete > ");
 		for (int x = 0; x < timetableList.size(); x++) {
+			boolean noMatch = false;
+			TuitionManagementSystem.tuitionDisplayHeaders();
 			// extracted method called here
-			if (timetableList.get(x).getTTID().equalsIgnoreCase(deleteInput)) {
+			String TuitionID = timetableList.get(x).getTTID();
+			//extracted variable 
+			if (TuitionID.equalsIgnoreCase(deleteInput)) {
+				noMatch = false;
 				System.out.println("Timetable ID selected: " + deleteInput.toUpperCase());
+				// added confirmation variable incase user names mistake
 				char confirmDel = Helper.readChar("Are you sure you would like to delete this timetable? (Y/N)");
 				if(confirmDel == 'Y' || confirmDel == 'y') {
 					timetableList.remove(x);
@@ -338,9 +345,13 @@ public class TuitionManagementSystem {
 					TuitionManagementSystem.deleteTuitionTimetable(timetableList);
 				}
 			} else {
+				noMatch = true;
 				String output = String.format("There are no existing timetables with ID '%s'", deleteInput.toUpperCase());
 				System.out.println(output);
+				break;
 			}
 		}
 	}
 }
+
+
